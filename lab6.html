@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Facts</title>
+    <style>
+        body {
+            background: url("") ;
+            background-position: center ;
+            background-repeat: no-repeat;
+            background-size:auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        th {
+            background-color: white;
+        }
+        img {
+            max-width: 60%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cat Facts</h1>
+    <button onclick="fetchData()">Fetch Facts</button>
+    <br><br>
+    <table id="factsTable">
+        <tr>
+            <th>ID</th>
+            <th>Fact</th>
+        </tr>
+    </table>
+    <br>
+    <img id="catImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1200px-Cat_August_2010-4.jpg" alt="Cat Image">
+    <script>
+        function fetchData() {
+            fetch('https://brianobruno.github.io/cats.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                data.facts.sort(function(a, b) {
+                    return a.factId - b.factId;
+                });
+                var table = document.getElementById('factsTable');
+                table.innerHTML = '<tr><th>ID</th><th>Fact</th></tr>';
+                data.facts.forEach(function(fact) {
+                    table.innerHTML += '<tr><td>' + fact.factId + '</td><td>' + fact.text + '</td></tr>';
+                });
+                var image = document.getElementById('catImage');
+                image.src = data.catPhoto;
+            })
+            .catch(function(error) {
+                console.error('Error fetching data:', error);
+            });
+        }
+    </script>
+</body>
+</html>

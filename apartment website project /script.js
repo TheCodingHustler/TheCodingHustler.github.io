@@ -23,10 +23,14 @@ async function searchProperties() {
 
   try {
     const response = await fetch(url, options);
-    const data = await response.json();
+    const responseData = await response.json();
 
-    console.log(data); // Output data to console for testing
-    displayProperties(data);
+    console.log(responseData); // Output data to console for testing
+    if (responseData && responseData.status === 200 && responseData.data && responseData.data.length > 0) {
+      displayProperties(responseData.data);
+    } else {
+      console.log("No properties found.");
+    }
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -36,27 +40,23 @@ function displayProperties(data) {
   const resultsContainer = document.getElementById("results");
   resultsContainer.innerHTML = "";
 
-  if (data && data.data && data.data.length > 0) {
-    const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
 
-    for (const property of data.data) {
-      const propertyElement = document.createElement("div");
-      propertyElement.classList.add("property");
+  for (const property of data) {
+    const propertyElement = document.createElement("div");
+    propertyElement.classList.add("property");
 
-      propertyElement.innerHTML = `
-        <h3>${property.name}</h3>
-        <p><strong>Bed Range:</strong> ${property.bedRange}</p>
-        <p><strong>Rent Range:</strong> ${property.rentRange}</p>
-        <p><strong>Address:</strong> ${property.address.fullAddress}</p>
-      `;
+    propertyElement.innerHTML = `
+      <h3>${property.name || 'Not available'}</h3>
+      <p><strong>Bed Range:</strong> ${property.bedRange || 'Not available'}</p>
+      <p><strong>Rent Range:</strong> ${property.rentRange || 'Not available'}</p>
+      <p><strong>Address:</strong> ${property.address && property.address.fullAddress ? property.address.fullAddress : 'Not available'}</p>
+    `;
 
-      fragment.appendChild(propertyElement);
-    }
-
-    resultsContainer.appendChild(fragment);
-  } else {
-    console.log("No properties found.");
+    fragment.appendChild(propertyElement);
   }
+
+  resultsContainer.appendChild(fragment);
 }
 
 async function getProperty(propertyId) {
@@ -67,19 +67,40 @@ async function getProperty(propertyId) {
     const propertyData = await response.json();
     
     console.log(propertyData); // Output property data to console for testing
-    displayPropertyDetails(propertyData);
+    if (propertyData && propertyData.status === 200 && propertyData.data) {
+      displayPropertyDetails(propertyData.data);
+    } else {
+      console.log("Property details not found.");
+    }
   } catch (error) {
     console.error('Error fetching property details:', error);
   }
 }
 
 function displayPropertyDetails(propertyData) {
-  // Display property details on the webpage
-  console.log(propertyData); // Output property data to console for testing
-  // You can manipulate the DOM to display property details as needed
+  const propertyDetailsContainer = document.getElementById("propertyDetails");
+  propertyDetailsContainer.innerHTML = ""; // Clear previous property details
+
+  const propertyElement = document.createElement("div");
+  propertyElement.classList.add("property-details");
+
+  propertyElement.innerHTML = `
+    <h3>${propertyData.name || 'Not available'}</h3>
+    <p><strong>Description:</strong> ${propertyData.description || 'Not available'}</p>
+    <p><strong>Lease Terms:</strong> ${propertyData.leaseTerms || 'Not available'}</p>
+    <p><strong>Last Modified Date:</strong> ${propertyData.lastModifiedDate || 'Not available'}</p>
+    <!-- Add more property details as needed -->
+  `;
+
+  propertyDetailsContainer.appendChild(propertyElement);
 }
 
 document.getElementById("searchForm").addEventListener("submit", async function(event) {
   event.preventDefault();
   await searchProperties();
+});
+
+document.getElementById("getPropertyBtn").addEventListener("click", function() {
+  const propertyId = document.getElementById("propertyIdInput").value;
+  getProperty(propertyId);
 });

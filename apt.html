@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AptRental</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/9428/9428333.png">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="wallpaper">
+    <nav class="navigation">
+      <div class="logo">
+        <a href="http://127.0.0.1:5500/apt.html"><img
+            src="https://png.pngtree.com/template/20191014/ourmid/pngtree-real-estate-logo-design-template-building-logo-image_317801.jpg"
+            alt="building log" class="logo-pic">
+        </a>
+      </div>
+      <div>
+        <ul class="menu-links">
+          <li><a class="active" href="#home">home</a></li>
+          <li><a href="#discover">discover</a></li>
+          <li><a href="#about">about</a></li>
+          <li><a href="#contacts">contacts</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section id="home">
+      <div class="outer-apartment-display">
+        <h2 class="subtitles-1">welcome to the</h2>
+        <h1 class="title-1">Apt Rental website</h1>
+        <br>
+        <h1 class="subtitles-1">Find apartments near you</h1>
+      </div>
+    </section>
+    <br>
+    <section id="discover">
+      <div class="Search-section">
+        <h2 class="Big-titles">DISCOVER YOUR OPTIONS</h2>
+        <p>Deciding to become a homeowner is a big deal! Luckily, with AptRental.com, you get the most accurate homes
+          for sale property data, an agent directory, and collaboration tools to browse with your agent and co-shopper
+          to help you make the right decision.</p>
+        <div class="apartment-display">
+          <div class="apt-img">
+            <img src="https://urbanmilwaukee.com/wp-content/uploads/2020/10/element-apartments.jpg "
+              alt="apartment pictures" class="apt-pics">
+            <p class="fancy-text">Apartments buildings</p>
+          </div>
+          <div class="apt-img">
+            <img
+              src="https://www.opcio-network.com/assets/immodb/immobilie/423/images/_resampled/FillWyIxMjAwIiwiNzUwIl0/IMG-2883.jpeg"
+              alt="apartment pictures" class="apt-pics">
+            <p class="fancy-text">Garden apartments</p>
+          </div>
+          <div class="apt-img">
+            <img src="https://www.redfin.com/blog/wp-content/uploads/2023/06/duplex-2.jpg " alt="apartment pictures"
+              class="apt-pics">
+            <p class="fancy-text">Duplex apartments</p>
+          </div>
+        </div>
+        <p>Enter your location below to find houses near you</p>
+        <div class="search-container">
+          <form id="searchForm" method="get">
+            <input type="text" id="locationInput" name="location" placeholder="Enter location">
+            <input type="number" id="minRentInput" name="minRent" placeholder="Minimum Rent">
+            <input type="number" id="maxRentInput" name="maxRent" placeholder="Maximum Rent">
+            <button class="btn" type="submit">Search</button>
+          </form>
+          <div id="results"></div>
+          <div id="propertyDetails"></div>
+          <div class="search-property">
+            <input type="text" id="propertyIdInput" placeholder="Enter Property ID">
+            <button class="btn" id="getPropertyBtn">Get Property Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section id="about">
+    <div class="about-details">
+      <h1 class="subtitles">About this website</h1>
+      <div class="info">
+        <h1 class="Big-titles">The Perfect Place To Manage Your Property</h1>
+      </div>
+      <div class="info-details">
+        <h3>
+          <img
+            src="https://www.jandstransport.com/wp-content/uploads/2021/12/moving-trends-since-covid-19.jpg"
+            alt="apartment-pic" class="about-pic">
+            About us
+        </h3>
+        <p>Welcome to our apartment website, a pioneering platform crafted with care by Amadou Barrie. Our mission is
+          simple: to empower individuals like you in the quest for the perfect home. Whether you're seeking a cozy
+          studio in the heart of the city or a spacious family-friendly abode nestled in the suburbs, we're here to
+          guide you every step of the way.
+
+          Driven by a passion for connecting people with their ideal living spaces, we've curated a comprehensive
+          database of properties to suit every taste and budget. Our intuitive search tools enable you to explore a
+          diverse range of listings, from trendy urban lofts to serene countryside retreats, all conveniently located
+          within your desired area.
+
+          But our commitment goes beyond just listings. We understand that finding the right home is about more than
+          just bricks and mortar—it's about finding a place where you can truly thrive. That's why we provide valuable
+          resources and insights to help you make informed decisions, whether you're a first-time renter or a seasoned
+          homeowner.
+
+          With a user-friendly interface and personalized recommendations, navigating the housing market has never been
+          easier. Join our community today and embark on the exciting journey of finding your dream home with
+          confidence. At <a href="http://127.0.0.1:5500/apt.html" target="_blank" class="apt-link">www.aptrental.com</a>,
+          your perfect living space is just a click away.</p>
+
+        <h4>Thank you for taking the time to read this. Your interest means a lot</h4>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section id="contacts">
+    <div class="contacts-details">
+      <h1 class="Big-titles">
+        Contact Us
+      </h1>
+      <div class="contacts-container">
+        <p>
+          We understand that finding the perfect home can sometimes raise questions or require additional assistance.
+          Our dedicated team is here to provide support and guidance throughout your home search journey. Please feel
+          free to reach out to us using any of the following methods:
+          <ul>
+            <li>
+              <p>Email:<a href="mailto:support@apartments.com" class="email-link">support@apartments.com</a></p>
+            </li>
+            <li>
+              <p>Phone: (844) 293-8899</p>
+            </li>
+            <li>
+              <p>Questions regarding rent payments processed through Apartments.com:
+                <a href="mailto:rentpayments@apartments.com" class="email-link">rentpayments@apartments.com</a> </p>
+            </li>
+          </ul>
+          We look forward to hearing from you and assisting in any way we can.
+        </p>
+      </div>
+    </div>
+  </section>
+  <script src="script.js" defer></script>
+</body>
+
+</html>
